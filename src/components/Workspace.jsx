@@ -29,15 +29,33 @@ const Workspace = ({ openTabs, activeTabId, setActiveTabId, closeTab, isCanvasEm
 
   // Content generator based on active tab
   
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault();
     setFormStatus('submitting');
     
-    // Simulate network request (Replace this with Web3Forms or Formspree fetch call later)
-    setTimeout(() => {
-      setFormStatus('success');
-      setTimeout(() => setFormStatus('idle'), 5000); // Reset after 5s
-    }, 1500);
+    try {
+      const formData = new FormData(e.target);
+      formData.append("access_key", "d0353389-1750-45af-8d3e-a57d3641f530");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setFormStatus('success');
+        e.target.reset(); // Clear the form
+        setTimeout(() => setFormStatus('idle'), 5000); // Reset UI after 5s
+      } else {
+        console.error("Form submission error:", data);
+        setFormStatus('idle'); // Fallback if API fails
+      }
+    } catch (error) {
+      console.error("Submission failed", error);
+      setFormStatus('idle');
+    }
   };
 
   const getTabContent = () => {
