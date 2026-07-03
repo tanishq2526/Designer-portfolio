@@ -1,0 +1,24 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--ps-bg);
+  color: var(--ps-text);
+  overflow: hidden;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 30px); /* Subtract top nav height */
+  overflow: hidden;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  /* Hide sidebars on mobile to maximize canvas space */
+  .toolbar-container, .panels-container {
+    display: none !important;
+  }
+}
