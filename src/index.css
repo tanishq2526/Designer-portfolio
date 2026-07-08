@@ -214,7 +214,6 @@ body {
 .canvas {
   width: 1000px;
   min-height: 600px;
-  max-height: 85vh;
   background-color: #ffffff;
   background-image: 
     linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
@@ -567,6 +566,26 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.project-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 1px solid #eaeaea;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+}
+
+.project-card:hover .project-image {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  opacity: 0.95;
+}
+
+
 .project-title {
   font-family: Poppins, sans-serif;
   font-size: 20px;
@@ -728,6 +747,7 @@ body {
   .canvas {
     width: 100% !important;
     max-width: 1000px !important;
+    min-height: auto !important;
   }
   
   .canvas-scroll-wrapper {
@@ -844,12 +864,9 @@ body {
 .menu-items {
   display: flex;
   gap: 2px;
-  overflow-x: auto; /* Enable horizontal scrolling on mobile */
-  scrollbar-width: none; /* Hide scrollbar for clean look */
+  overflow: visible;
 }
-.menu-items::-webkit-scrollbar {
-  display: none;
-}
+
 
 .menu-item-wrapper {
   position: relative;
@@ -880,7 +897,6 @@ body {
 
 .dropdown-item {
   padding: 6px 15px;
-  cursor: pointer;
   color: var(--ps-text);
 }
 
@@ -1028,4 +1044,32 @@ body {
   color: #999;
   width: 30px;
   text-align: right;
+}
+
+/* A11y Focus Styles */
+button:focus-visible, .menu-item:focus-visible, .tab:focus-visible, .tool-btn:focus-visible, .layer-item:focus-visible, .project-image-btn:focus-visible, .star-btn:focus-visible, .close-btn:focus-visible {
+  outline: 2px solid var(--canvas-accent, #ff6b00);
+  outline-offset: 2px;
+}
+
+/* Workspace Refactor Classes */
+.hero-title {
+  font-size: 64px;
+}
+.hero-subtitle {
+  font-size: 20px;
+  margin-top: 20px;
+}
+.close-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.empty-state-text {
+  color: var(--ps-text-dim);
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Move, 
   MousePointer2, 
@@ -13,8 +13,7 @@ import {
   Square
 } from 'lucide-react';
 
-const Toolbar = () => {
-  const [activeTool, setActiveTool] = useState('move');
+const Toolbar = ({ activeTool, setActiveTool }) => {
 
   const tools = [
     { id: 'move', icon: <Move size={16} /> },
@@ -33,16 +32,20 @@ const Toolbar = () => {
     <div style={styles.toolbarContainer}>
       <div style={styles.tools}>
         {tools.map((tool) => (
-          <div 
+          <button 
+            type="button"
             key={tool.id} 
+            aria-label={`${tool.id} tool`}
             style={{
               ...styles.toolBtn,
               backgroundColor: activeTool === tool.id ? 'var(--ps-highlight)' : 'transparent',
+              border: 'none',
+              padding: 0
             }}
             onClick={() => setActiveTool(tool.id)}
           >
             {tool.icon}
-          </div>
+          </button>
         ))}
       </div>
       

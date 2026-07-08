@@ -4,11 +4,13 @@ import TopNav from './components/TopNav.jsx';
 import Toolbar from './components/Toolbar.jsx';
 import Workspace from './components/Workspace.jsx';
 import Panels from './components/Panels.jsx';
+import TutorialOverlay from './components/TutorialOverlay.jsx';
 
 function App() {
   const [activeLayerId, setActiveLayerId] = useState(1);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [accentColor, setAccentColor] = useState('#ff6b00'); // Default bright orange
+  const [activeTool, setActiveTool] = useState('move');
 
   // Update CSS variable dynamically
   useEffect(() => {
@@ -78,13 +80,15 @@ function App() {
         isCanvasEmpty={isCanvasEmpty}
       />
       <div className="main-layout">
-        <Toolbar />
+        <Toolbar activeTool={activeTool} setActiveTool={setActiveTool} />
         <Workspace 
           openTabs={openTabs} 
           activeTabId={activeTabId} 
           setActiveTabId={setActiveTabId}
           closeTab={closeTab}
           isCanvasEmpty={isCanvasEmpty}
+          openTab={openTab}
+          activeTool={activeTool}
         />
         <Panels 
           layers={layers} 
@@ -94,6 +98,7 @@ function App() {
           setAccentColor={setAccentColor}
         />
       </div>
+      <TutorialOverlay />
     </div>
   );
 }

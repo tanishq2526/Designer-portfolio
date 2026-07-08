@@ -19,11 +19,20 @@ const LayerPanel = ({ layers, activeLayerId, setActiveLayerId }) => {
       
       <div style={styles.layersList}>
         {layers.map(layer => (
-          <div 
+          <button 
+            type="button"
             key={layer.id} 
+            aria-label={`Select layer ${layer.name}`}
             style={{
               ...styles.layerItem,
               backgroundColor: activeLayerId === layer.id ? 'var(--ps-highlight)' : 'transparent',
+              border: 'none',
+              borderBottom: '1px solid var(--ps-border)',
+              padding: '4px 10px',
+              width: '100%',
+              textAlign: 'left',
+              color: 'inherit',
+              font: 'inherit'
             }}
             onClick={() => setActiveLayerId(layer.id)}
           >
@@ -35,7 +44,7 @@ const LayerPanel = ({ layers, activeLayerId, setActiveLayerId }) => {
             </div>
             <span style={styles.layerName}>{layer.name}</span>
             {layer.locked && <Lock size={12} style={{marginLeft: 'auto', color: 'var(--ps-text-dim)'}} />}
-          </div>
+          </button>
         ))}
       </div>
     </div>
